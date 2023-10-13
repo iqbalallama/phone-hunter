@@ -1,11 +1,12 @@
-const dataFetch = () =>{
-    const url = 'https://openapi.programming-hero.com/api/phones?search=iphone';
+const dataFetch = (search) =>{
+    const url = `https://openapi.programming-hero.com/api/phones?search=${search}`;
     fetch(url)
     .then(res => res.json())
     .then(data => display(data.data))
 }
 const display = (data) =>{
     const searchBody= document.getElementById('search-body');
+    searchBody.textContent = '';
     data.forEach(dt => {
         console.log(dt)
         const div = document.createElement('div');
@@ -24,4 +25,9 @@ const display = (data) =>{
         searchBody.appendChild(div)
     });
 }
-dataFetch()
+const searchBtn =()=>{
+    const inputField = document.getElementById('input-field');
+    const searchText = inputField.value ;
+    dataFetch(searchText)
+    inputField.value = ''
+}
