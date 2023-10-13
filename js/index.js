@@ -7,6 +7,7 @@ const dataFetch = (search) =>{
 const display = (data) =>{
     const searchBody= document.getElementById('search-body');
     searchBody.textContent = '';
+    data = data.slice(0,12)
     data.forEach(dt => {
         console.log(dt)
         const div = document.createElement('div');
@@ -24,10 +25,20 @@ const display = (data) =>{
         `
         searchBody.appendChild(div)
     });
+    spinner(false)
 }
 const searchBtn =()=>{
+    spinner(true)
     const inputField = document.getElementById('input-field');
     const searchText = inputField.value ;
     dataFetch(searchText)
     inputField.value = ''
+}
+const spinner =(isLoading)=>{
+    const loading = document.getElementById('loading');
+    if(isLoading){
+        loading.classList.remove('hidden')
+    }else{
+        loading.classList.add('hidden')
+    }
 }
